@@ -7,5 +7,4 @@ cat input.txt | awk '{
         s+=index("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",a[i])
         break
     }
-}
-END {print s}'
+} END {print s}'

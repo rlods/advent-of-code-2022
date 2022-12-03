@@ -6,5 +6,4 @@ cat input.txt | xargs -L3 | awk '{
         s+=index("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",a[i])
         break
     }
-}
-END {print s}'
+} END {print s}'
