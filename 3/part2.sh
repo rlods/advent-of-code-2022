@@ -5,11 +5,9 @@ cat input.txt | xargs -L3 | awk 'BEGIN {m["a"]=1;m["b"]=2;m["c"]=3;m["d"]=4;m["e
     split($1,a,"")
     b=$2
     c=$3
-    for (i=1;i<=length(a);++i) {
-        if (index(b,a[i])>0 && index(c,a[i])>0) {
-            s+=m[a[i]]
-            break
-        }
-    } 
+    for (i=1;i<=length(a);++i) if (index(b,a[i])>0 && index(c,a[i])>0) {
+        s+=m[a[i]]
+        break
+    }
 }
 END {print s}'
