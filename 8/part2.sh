@@ -5,8 +5,7 @@ cat input.txt | tr -d '\n' | awk '{
     for(t=i=0;i<l;++i){
         x=i%w;y=int(i/w)
         if(x!=0&&y!=0&&x!=w-1&&y!=w-1){
-            h=a[(x+y*w)+1];dl=dr=dt=db=0
-            rs=0;bs=0
+            h=a[(x+y*w)+1];dl=dr=dt=db=rs=bs=0
             for(j=0;j<w;++j){
                 m=j%w;n=j%w
                 if(m<x)dl=a[(m+y*w)+1]<h?dl+1:1
