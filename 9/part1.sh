@@ -4,30 +4,36 @@ cat input.txt | awk '
 BEGIN {
     H = 0
     T = 1
-    x[H] = y[H] = x[T] = y[T] = 0
-    a[0,0] = 1
+    for (i=H; i<=T; ++i)
+        x[i]=y[i]=0
+    a[0,0]=1
 } {
     for (k=0; k<$2; ++k) {
         if      ($1=="R") x[H]++
         else if ($1=="L") x[H]--
         else if ($1=="U") y[H]++
         else if ($1=="D") y[H]--
-        if ((x[H] - x[T]) ** 2 + (y[H] - y[T]) ** 2 > 2) {
-            if      (y[H]==y[T]) d=x[H]>x[T]?"⮕":"⬅"
-            else if (x[H]==x[T]) d=y[H]>y[T]?"⬆":"⬇"
-            else if (y[H]>y[T])  d=x[H]>x[T]?"⬈":"⬉"
-            else                 d=x[H]>x[T]?"⬊":"⬋"  
-        
-            if      (d=="⮕") x[T]++
-            else if (d=="⬅") x[T]--
-            else if (d=="⬆") y[T]++
-            else if (d=="⬇") y[T]--
-            else if (d=="⬈") {x[T]++; y[T]++}
-            else if (d=="⬉") {x[T]--; y[T]++}
-            else if (d=="⬊") {x[T]++; y[T]--}
-            else if (d=="⬋") {x[T]--; y[T]--}
-            a[x[T],y[T]]=1
+        for (i=H+1; i<=T; ++i) {
+            if ((x[i-1] - x[i]) ** 2 + (y[i-1] - y[i]) ** 2 > 2) {
+                if      (y[i-1]==y[i]) d=x[i-1]>x[i]?"⮕":"⬅"
+                else if (x[i-1]==x[i]) d=y[i-1]>y[i]?"⬆":"⬇"
+                else if (y[i-1]>y[i])  d=x[i-1]>x[i]?"⬈":"⬉"
+                else                   d=x[i-1]>x[i]?"⬊":"⬋"  
+            
+                if      (d=="⮕") x[i]++
+                else if (d=="⬅") x[i]--
+                else if (d=="⬆") y[i]++
+                else if (d=="⬇") y[i]--
+                else if (d=="⬈") {x[i]++; y[i]++}
+                else if (d=="⬉") {x[i]--; y[i]++}
+                else if (d=="⬊") {x[i]++; y[i]--}
+                else if (d=="⬋") {x[i]--; y[i]--}
+
+                if (i==T)
+                    a[x[i],y[i]]=1
+            }
         }
+        # Print rope here
     }
 } END {
     print length(a)
