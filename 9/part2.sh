@@ -4,34 +4,34 @@ cat input.txt | awk '
 BEGIN {
     H = 0
     T = 9
-    for (i=H; i<=T; ++i)
-        x[i]=y[i]=0
+    for (k=H; k<=T; ++k)
+        x[k]=y[k]=0
     a[0,0]=1
 } {
-    for (k=0; k<$2; ++k) {
+    for (s=0; s<$2; ++s) {
         if      ($1=="U") y[H]++
         else if ($1=="D") y[H]--
         else if ($1=="R") x[H]++
         else if ($1=="L") x[H]--
-        for (i=H+1; i<=T; ++i) {
-            dx = x[i-1] - x[i]
-            dy = y[i-1] - y[i]
+        for (k=H+1; k<=T; ++k) {
+            dx = x[k-1] - x[k]
+            dy = y[k-1] - y[k]
             if (dx ** 2 + dy ** 2 > 2) {
                 if (dx == 0)
-                    if (dy > 0) y[i]++ # ⬆
-                    else        y[i]-- # ⬇
+                    if (dy > 0) y[k]++ # ⬆
+                    else        y[k]-- # ⬇
                 else if (dy == 0)
-                    if (dx > 0) x[i]++ # ⮕
-                    else        x[i]-- # ⬅
+                    if (dx > 0) x[k]++ # ⮕
+                    else        x[k]-- # ⬅
                 else if (dy > 0)
-                    if (dx > 0) { x[i]++; y[i]++ } # ⬈
-                    else        { x[i]--; y[i]++ } # ⬉
+                    if (dx > 0) { x[k]++; y[k]++ } # ⬈
+                    else        { x[k]--; y[k]++ } # ⬉
                 else
-                    if (dx > 0) { x[i]++; y[i]-- } # ⬊
-                    else        { x[i]--; y[i]-- } # ⬋  
+                    if (dx > 0) { x[k]++; y[k]-- } # ⬊
+                    else        { x[k]--; y[k]-- } # ⬋  
                 
-                if (i==T)
-                    a[x[i],y[i]]=1
+                if (k==T)
+                    a[x[k],y[k]]=1
             }
         }
     }
@@ -39,17 +39,18 @@ BEGIN {
     print length(a)
 }'
 
+
 # Y1=-20;Y2=20;X1=-20;X2=20
 # for (Y=Y2;Y>=Y1;--Y) {
 #     for (X=X1;X<=X2;++X) {
-#         for (o=H;o<T+1;++o) {
-#             if (X==x[o] && Y==y[o]) {
-#                 if (o==H) printf("H")
-#                 else printf(o)
+#         for (K=H;K<T+1;++K) {
+#             if (X==x[K] && Y==y[K]) {
+#                 if (K==H) printf("H")
+#                 else printf(K)
 #                 break
 #             }
 #         }
-#         if (o==T+1)
+#         if (K==T+1)
 #             printf(X==0&&Y==0?"s":".")
 #     }
 #     printf("\n")
