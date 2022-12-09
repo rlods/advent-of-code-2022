@@ -14,9 +14,8 @@ BEGIN {
         else if ($1=="U") y[H]++
         else if ($1=="D") y[H]--
         for (i=H+1; i<=T; ++i) {
-            s2 = (x[i-1] - x[i]) ** 2 + (y[i-1] - y[i]) ** 2
-            if (s2 > 2) {
-                s = sqrt(s2)
+            d2 = (x[i-1] - x[i]) ** 2 + (y[i-1] - y[i]) ** 2
+            if (d2 > 2) {
                 if      (y[i-1]==y[i]) d=x[i-1]>x[i]?"⮕":"⬅"
                 else if (x[i-1]==x[i]) d=y[i-1]>y[i]?"⬆":"⬇"
                 else if (y[i-1]>y[i])  d=x[i-1]>x[i]?"⬈":"⬉"
