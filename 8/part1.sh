@@ -31,9 +31,8 @@ cat input.txt \
     for (treeIndex = 0; treeIndex < totalTreeCount; ++treeIndex) {
         treeX = treeIndex % gridWidth
         treeY = int(treeIndex / gridWidth)
-        if (treeX == 0 || treeY == 0 || treeX == w-1 || treeY == w-1) {
-            # Tree is visible because on grid edge
-            visibleTreeCount++
+        if (treeX == 0 || treeY == 0 || treeX == w - 1 || treeY == w - 1) {
+            visibleTreeCount++ # Tree is visible because on grid edge
         }
         else {
             treeHeight = treeArray[treeIndex + 1]
@@ -54,8 +53,7 @@ cat input.txt \
                     hasBottomObstacle = treeArray[(treeX + otherTreeY * gridWidth) + 1] >= treeHeight
             }
             if (!hasLeftObstacle || !hasRightObstacle || !hasTopObstacle || !hasBottomObstacle) {
-                # Tree is visible from at least one side
-                visibleTreeCount++
+                visibleTreeCount++ # Tree is visible from at least one side
             }
         }
     }
