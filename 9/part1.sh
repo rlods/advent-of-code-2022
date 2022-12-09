@@ -12,8 +12,7 @@ BEGIN {
         else if ($1=="L") x[H]--
         else if ($1=="U") y[H]++
         else if ($1=="D") y[H]--
-        d2 = (x[H] - x[T]) ** 2 + (y[H] - y[T]) ** 2
-        if (d2 > 2) {
+        if ((x[H] - x[T]) ** 2 + (y[H] - y[T]) ** 2 > 2) {
             if      (y[H]==y[T]) d=x[H]>x[T]?"⮕":"⬅"
             else if (x[H]==x[T]) d=y[H]>y[T]?"⬆":"⬇"
             else if (y[H]>y[T])  d=x[H]>x[T]?"⬈":"⬉"
