@@ -39,16 +39,19 @@ BEGIN {
     print length(a)
 }'
 
-# print("\033[2J")
-# Y1=-5;Y2=5;X1=-5;X2=5
+# Y1=-20;Y2=20;X1=-20;X2=20
 # for (Y=Y2;Y>=Y1;--Y) {
 #     for (X=X1;X<=X2;++X) {
-#         if      (X==x[H] && Y==y[H]) printf("H")
-#         else if (X==x[T] && Y==y[T]) printf("T")
-#         else if (X==0 && Y==0)       printf("s")
-#         else                         printf(".")
+#         for (o=H;o<T+1;++o) {
+#             if (X==x[o] && Y==y[o]) {
+#                 if (o==H) printf("H")
+#                 else printf(o)
+#                 break
+#             }
+#         }
+#         if (o==T+1)
+#             printf(X==0&&Y==0?"s":".")
 #     }
 #     printf("\n")
 # }
 # printf("\n")
-# system("sleep 0.3");
