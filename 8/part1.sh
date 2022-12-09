@@ -2,21 +2,20 @@
 
 cat input.txt | tr -d '\n' | awk '{
     split($1,a,"");l=length(a);w=sqrt(l)
-    for(i=0;i<l;++i){
-        x=i%w;y=int(i/w);v=x==0||y==0||x==w-1||y==w-1
-        if(!v){
-            c=a[(x+y*w)+1];nl=nr=nt=nb=0
+    for(t=i=0;i<l;++i){
+        x=i%w;y=int(i/w)
+        if(x==0||y==0||x==w-1||y==w-1)t++
+        else{
+            h=a[(x+y*w)+1];ol=or=ot=ob=0
             for(j=0;j<w;++j){
-                x2=j%w;y2=j%w
-                if(x2<x)nl=nl||a[(x2+y*w)+1]>=c
-                if(x2>x)nr=nr||a[(x2+y*w)+1]>=c
-                if(y2<y)nt=nt||a[(x+y2*w)+1]>=c
-                if(y2>y)nb=nb||a[(x+y2*w)+1]>=c
-                v=!nl||!nr||!nt||!nb
-                if(!v)break
+                m=j%w;n=j%w
+                if(m<x)ol=ol||a[(m+y*w)+1]>=h
+                if(m>x)or=or||a[(m+y*w)+1]>=h
+                if(n<y)ot=ot||a[(x+n*w)+1]>=h
+                if(n>y)ob=ob||a[(x+n*w)+1]>=h
             }
+            t+=!(ol&&or&&ot&&ob)
         }
-        t+=v
     }
     print t
 }'
