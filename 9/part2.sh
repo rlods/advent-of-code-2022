@@ -9,31 +9,31 @@ BEGIN {
     a[0,0]=1
 } {
     for (k=0; k<$2; ++k) {
-        if      ($1=="R") x[H]++
-        else if ($1=="L") x[H]--
-        else if ($1=="U") y[H]++
+        if      ($1=="U") y[H]++
         else if ($1=="D") y[H]--
+        else if ($1=="R") x[H]++
+        else if ($1=="L") x[H]--
         for (i=H+1; i<=T; ++i) {
-            if ((x[i-1] - x[i]) ** 2 + (y[i-1] - y[i]) ** 2 > 2) {
-                if      (y[i-1]==y[i]) d=x[i-1]>x[i]?"⮕":"⬅"
-                else if (x[i-1]==x[i]) d=y[i-1]>y[i]?"⬆":"⬇"
-                else if (y[i-1]>y[i])  d=x[i-1]>x[i]?"⬈":"⬉"
-                else                   d=x[i-1]>x[i]?"⬊":"⬋"  
-            
-                if      (d=="⮕") x[i]++
-                else if (d=="⬅") x[i]--
-                else if (d=="⬆") y[i]++
-                else if (d=="⬇") y[i]--
-                else if (d=="⬈") {x[i]++; y[i]++}
-                else if (d=="⬉") {x[i]--; y[i]++}
-                else if (d=="⬊") {x[i]++; y[i]--}
-                else if (d=="⬋") {x[i]--; y[i]--}
-
+            dx = x[i-1] - x[i]
+            dy = y[i-1] - y[i]
+            if (dx ** 2 + dy ** 2 > 2) {
+                if (dx == 0)
+                    if (dy > 0) y[i]++ # ⬆
+                    else        y[i]-- # ⬇
+                else if (dy == 0)
+                    if (dx > 0) x[i]++ # ⮕
+                    else        x[i]-- # ⬅
+                else if (dy > 0)
+                    if (dx > 0) { x[i]++; y[i]++ } # ⬈
+                    else        { x[i]--; y[i]++ } # ⬉
+                else
+                    if (dx > 0) { x[i]++; y[i]-- } # ⬊
+                    else        { x[i]--; y[i]-- } # ⬋  
+                
                 if (i==T)
                     a[x[i],y[i]]=1
             }
         }
-        # Print rope here
     }
 } END {
     print length(a)
