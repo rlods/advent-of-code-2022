@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cat input.txt | awk '
+awk '
 BEGIN {
     H = 0
     T = 9
@@ -26,7 +26,7 @@ BEGIN {
     }
 } END {
     print length(a)
-}'
+}' input.txt
 
 
 # Y1=-20;Y2=20;X1=-20;X2=20
