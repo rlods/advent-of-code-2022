@@ -17,12 +17,9 @@ BEGIN {
             dx = x[k-1] - x[k]
             dy = y[k-1] - y[k]
             if (dx ** 2 + dy ** 2 > 2) {
-                if (dx > 0) x[k]++
-                else if (dx < 0) x[k]--
-                
-                if (dy > 0) y[k]++
-                else if (dy < 0) y[k]--
-                
+                # (A>0) - (A<0) is a way to get the sign of A ie. -1, 0 or 1
+                x[k] += (dx>0) - (dx<0)
+                y[k] += (dy>0) - (dy<0)
                 if (k==T) a[x[k],y[k]]=1
             }
         }
