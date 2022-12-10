@@ -17,21 +17,13 @@ BEGIN {
             dx = x[k-1] - x[k]
             dy = y[k-1] - y[k]
             if (dx ** 2 + dy ** 2 > 2) {
-                if (dx == 0)
-                    if (dy > 0) y[k]++ # ⬆
-                    else        y[k]-- # ⬇
-                else if (dy == 0)
-                    if (dx > 0) x[k]++ # ⮕
-                    else        x[k]-- # ⬅
-                else if (dy > 0)
-                    if (dx > 0) { x[k]++; y[k]++ } # ⬈
-                    else        { x[k]--; y[k]++ } # ⬉
-                else
-                    if (dx > 0) { x[k]++; y[k]-- } # ⬊
-                    else        { x[k]--; y[k]-- } # ⬋  
+                if (dx > 0) x[k]++
+                else if (dx < 0) x[k]--
                 
-                if (k==T)
-                    a[x[k],y[k]]=1
+                if (dy > 0) y[k]++
+                else if (dy < 0) y[k]--
+                
+                if (k==T) a[x[k],y[k]]=1
             }
         }
     }
@@ -39,6 +31,18 @@ BEGIN {
     print length(a)
 }'
 
+cat input.txt | awk 'BEGIN{H=0;T=1;a[0,0]=1;for(k=H;k<=T;++k)x[k]=y[k]=0}{
+for(s=0;s<$2;++s){
+    if($1=="U")y[H]++;if($1=="D")y[H]--;if($1=="R")x[H]++;if($1=="L")x[H]--
+    for(k=H+1;k<=T;++k){
+        dx=x[k-1]-x[k];dy=y[k-1]-y[k]
+        if(dx**2+dy**2>2){
+            if(dx>0)x[k]++;else if(dx<0)x[k]--
+            if(dy>0)y[k]++;else if(dy<0)y[k]--
+            if(k==T)a[x[k],y[k]]=1
+        }
+    }
+}}END{print length(a)}'
 
 # Y1=-20;Y2=20;X1=-20;X2=20
 # for (Y=Y2;Y>=Y1;--Y) {
@@ -56,3 +60,5 @@ BEGIN {
 #     printf("\n")
 # }
 # printf("\n")
+
+

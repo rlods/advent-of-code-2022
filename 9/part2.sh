@@ -17,21 +17,13 @@ BEGIN {
             dx = x[k-1] - x[k]
             dy = y[k-1] - y[k]
             if (dx ** 2 + dy ** 2 > 2) {
-                if (dx == 0)
-                    if (dy > 0) y[k]++ # ⬆
-                    else        y[k]-- # ⬇
-                else if (dy == 0)
-                    if (dx > 0) x[k]++ # ⮕
-                    else        x[k]-- # ⬅
-                else if (dy > 0)
-                    if (dx > 0) { x[k]++; y[k]++ } # ⬈
-                    else        { x[k]--; y[k]++ } # ⬉
-                else
-                    if (dx > 0) { x[k]++; y[k]-- } # ⬊
-                    else        { x[k]--; y[k]-- } # ⬋  
+                if (dx > 0) x[k]++
+                else if (dx < 0) x[k]--
                 
-                if (k==T)
-                    a[x[k],y[k]]=1
+                if (dy > 0) y[k]++
+                else if (dy < 0) y[k]--
+                
+                if (k==T) a[x[k],y[k]]=1
             }
         }
     }
