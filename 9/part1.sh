@@ -32,10 +32,10 @@ cat input.txt | awk 'BEGIN{H=0;T=1;a[0,0]=1;for(k=H;k<=T;++k)x[k]=y[k]=0}{
 for(s=0;s<$2;++s){
     if($1=="U")y[H]++;if($1=="D")y[H]--;if($1=="R")x[H]++;if($1=="L")x[H]--
     for(k=H+1;k<=T;++k){
-        dx=x[k-1]-x[k];dy=y[k-1]-y[k]
-        if(dx**2+dy**2>2){
-            x[k]+=(dx>0)-(dx<0)
-            y[k]+=(dy>0)-(dy<0)
+        v=x[k-1]-x[k];w=y[k-1]-y[k]
+        if(v**2+w**2>2){
+            x[k]+=(v>0)-(v<0)
+            y[k]+=(w>0)-(w<0)
             if(k==T)a[x[k],y[k]]=1
         }
     }
