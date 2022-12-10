@@ -30,18 +30,22 @@ BEGIN {
 
 
 # Y1=-20;Y2=20;X1=-20;X2=20
+# grid=""
 # for (Y=Y2;Y>=Y1;--Y) {
 #     for (X=X1;X<=X2;++X) {
 #         for (K=H;K<T+1;++K) {
 #             if (X==x[K] && Y==y[K]) {
-#                 if (K==H) printf("H")
-#                 else printf(K)
+#                 if (K==H) grid = grid "H"
+#                 else grid = grid K
 #                 break
 #             }
 #         }
 #         if (K==T+1)
-#             printf(X==0&&Y==0?"s":".")
+#             grid = grid (X==0&&Y==0?"s":a[X,Y]?"∙":" ")
 #     }
-#     printf("\n")
+#     grid = grid "\n"
 # }
-# printf("\n")
+# grid = grid NR
+# system("tput reset")
+# print grid
+# system("sleep 0.03")
