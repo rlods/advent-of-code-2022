@@ -1,12 +1,11 @@
 #!/bin/sh
 
-awk 'BEGIN{x=1}{
+awk 'BEGIN{x=1;W=40}{
     d=$1=="addx"?2:1
     for(i=0;i<d;++i){
-        if(c%240==0){b=0;printf("\033c")}
         ++c;t=c-x-b+1
         printf(t>0&&t<4?"#":".")
-        if(c%40==0){b+=40;printf("\n")}
+        if(c%W==0){b+=W;printf("\n")}
     }
     if($1=="addx")x+=$2
 }' input.txt
