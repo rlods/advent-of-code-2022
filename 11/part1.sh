@@ -1,14 +1,14 @@
 #!/bin/sh
 
 awk -v R=20 '
-/M/{M=int(substr($2,1,length($2)-1))}
+BEGIN{M=0}
 /S/{for(i=3;i<=NF;++i)I[M]=I[M] $i}
 /O/{O[M]=$5;V[M]=$6}
 /T/{D[M]=$4}
 /tr/{T[M]=$6}
-/fa/{F[M]=$6}
+/fa/{F[M]=$6;++M}
 END{
-   for(r=1;r<=R;++r)for(m=0;m<=M;++m){
+   for(r=1;r<=R;++r)for(m=0;m<M;++m){
         split(I[m],it,",");delete I[m]
         for(i=1;i<=length(it);++i){
             v=it[i]
@@ -22,7 +22,7 @@ END{
         }
     }
     m1=m2=0
-    for(m=0;m<=M;++m)
+    for(m=0;m<M;++m)
         if(MC[m]>m1){m2=m1;m1=MC[m]}
         else if(MC[m]>m2)m2=MC[m]
     print m1*m2
