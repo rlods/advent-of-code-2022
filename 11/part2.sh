@@ -22,12 +22,12 @@ END{
             d=!(v%D[m])
             if(d)I[T[m]]=I[T[m]]?I[T[m]]","v:v
             else I[F[m]]=I[F[m]]?I[F[m]]","v:v
-            MC[m]++
+            C[m]++
         }
     }
     m1=m2=0
     for(m=0;m<M;++m)
-        if(MC[m]>m1){m2=m1;m1=MC[m]}
-        else if(MC[m]>m2)m2=MC[m]
+        if(C[m]>m1){m2=m1;m1=C[m]}
+        else if(C[m]>m2)m2=C[m]
     print m1*m2
 }' input.txt
